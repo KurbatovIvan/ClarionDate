@@ -47,7 +47,7 @@ public class ClarionDate {
 		num = num - dateTopSpeed;
 		// Устанавливаем значение года		
 		num = num - setyear(num);
-		// Устанавливаем значение года
+		// Устанавливаем значение месяца
 		num = num - setmonth(num);
 		day = num;
 		System.out.printf("Year: %d \n", year);
