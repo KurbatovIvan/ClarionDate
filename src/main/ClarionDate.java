@@ -2,7 +2,7 @@ package main;
 
 import java.time.Month;
 import java.time.Year;
-import java.util.Scanner;
+import java.util.Scanner;;
 
 public class ClarionDate {
 	private static int year = 1801;
@@ -37,6 +37,18 @@ public class ClarionDate {
 	}
 
 	public static void main(String[] args) {
+
+		YearLambda getYear = (data) -> {
+			int daysInYear = Year.of(year).length();
+
+			int i = daysInYear;
+			while (i < data) {
+				year = year + 1;
+				daysInYear = Year.of(year).length();
+				i = i + daysInYear;
+			}
+			return i - daysInYear;
+		};
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter clarion number: ");
 		int num = in.nextInt();
@@ -46,7 +58,9 @@ public class ClarionDate {
 		// Корректировка
 		num = num - dateTopSpeed;
 		// Устанавливаем значение года		
-		num = num - setyear(num);
+		//num = num - setyear(num); // По старинке
+		// Через лямбду, но функция на мой взгляд не красива тем что кроме того что возвращает значение, еще и меняет значение переменной year, т.е. скрытое поведение у нее, неявное
+		num = num - getYear.get(num);
 		// Устанавливаем значение месяца
 		num = num - setmonth(num);
 		day = num;
